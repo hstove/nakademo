@@ -1,0 +1,45 @@
+scripts:
+  wallet:
+    cmd:
+      - vr bitcoin createwallet ""
+
+  unloadwallet:
+    cmd:
+      - vr bitcoin unloadwallet ""
+
+  mine:
+    cmd:
+      - while true; do vr mineblocks 1; sleep 30; done
+    
+  mineblocks:
+    desc: "Mine a specified number of blocks blocks"
+    cmd:
+      - run() { vr bitcoin generatetoaddress $1 n3GRiDLKWuKLCw1DZmV75W1mE35qmW2tQm; }; run
+
+  bitcoin:
+    desc: "Helper for bitcoin-cli"
+    cmd:
+      - bitcoin-cli -rpcpassword=devnet -rpcuser=devnet -rpcport=18443
+
+  minemany:
+    cmd:
+      - vr bitcoin mineblocks 10
+  
+  btc:
+    cmd:
+      - rm -rf tmp/data/btc
+      - mkdir -p tmp/data/btc
+      - bitcoind -conf=$(pwd)/bitcoin.conf -nodebuglogfile
+
+  stacks:
+    cmd:
+      - rm -rf tmp/devnet
+      - mkdir -p tmp/devnet/nakamoto-neon/burnchain
+      - touch tmp/devnet/nakamoto-neon/burnchain/burnchain.sqlite
+      # - ~/stacker/stacks-core/target/debug/stacks-node start --config=./Stacks.toml
+      - RUST_LOG=debug stacks-node start --config=./Stacks-neon.toml
+  
+  # testargs:
+  #   cmd:
+  #     # - echo $2 $1
+  #     - run() { echo $2 $1; }; run
