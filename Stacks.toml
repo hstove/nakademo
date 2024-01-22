@@ -6,6 +6,7 @@ p2p_bind = "0.0.0.0:20444"
 data_url = "http://127.0.0.1:20443"
 p2p_address = "127.0.0.1:20443"
 miner = true
+mock_mining = true
 seed = "3b68e410cc7f9b8bae76f2f2991b69ecd0627c95da22a904065dfb2a73d0585f01"
 local_peer_seed = "3b68e410cc7f9b8bae76f2f2991b69ecd0627c95da22a904065dfb2a73d0585f01"
 pox_sync_sample_secs = 0

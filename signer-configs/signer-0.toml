@@ -1,0 +1,11 @@
+
+message_private_key = "B7HXWR7GK4E6n6239M86ycYh13AxoXxMU2DqowcQf2p9"
+stacks_private_key = "9e4d3b3ed869f0a133b992836615e53a515b225aba5109e10f41e556a8f96a5501"
+node_host = "127.0.0.1:20443"
+endpoint = "localhost:30000"
+network = "testnet"
+stackerdb_contract_id = "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.signers-stackerdb"
+signer_id = 0
+signers = [
+            {public_key = "rvecz1zvgPPut6taccsUq5VTdSoX6kPbC5pa3MzUhBsY", key_ids = [1, 2]}
+        ]

@@ -8,7 +8,7 @@ requirements = []
 [contracts.signers-stackerdb]
 path = 'contracts/signers-stackerdb.clar'
 clarity_version = 2
-epoch = 2.4
+epoch = 2.1
 
 [repl]
 enable_clarity_wasm = true

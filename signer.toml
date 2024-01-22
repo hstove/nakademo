@@ -1,10 +1,13 @@
 
-message_private_key = "2ZCxUV9BAKJrGnTPaamKHb4HVgj9ArQgEhowuTe7uRt3"
+# message_private_key = "2ZCxUV9BAKJrGnTPaamKHb4HVgj9ArQgEhowuTe7uRt3"
+# message_private_key = "9e4d3b3ed869f0a133b992836615e53a515b225aba5109e10f41e556a8f96a5501"
+message_private_key = "BewimTacGP8gtWgXTLLpLSqvck2T3RiNHG9AWcHbPB5v"
 stacks_private_key = "69be0e68947fa7128702761151dc8d9b39ee1401e547781bb2ec3e5b4eb1b36f01"
 node_host = "127.0.0.1:20443"
-endpoint = "localhost:30000"
+# node_host = "localhost:11111"
+endpoint = "127.0.0.1:30000"
 network = "testnet"
-stackerdb_contract_id = "ST11Z60137Y96MF89K1KKRTA3CR6B25WY1Y931668.signers-stackerdb"
+stackerdb_contract_id = "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.signers-stackerdb"
 signer_id = 0
 signers = [
   { public_key = "swBaKxfzs4pQne7spxhrkF6AtB34WEcreAkJ8mPcqx3t", key_ids = [

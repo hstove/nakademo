@@ -1,7 +1,7 @@
 scripts:
   wallet:
     cmd:
-      - vr bitcoin createwallet ""
+      - vr bitcoin createwallet "" false
 
   unloadwallet:
     cmd:
@@ -34,10 +34,19 @@ scripts:
   stacks:
     cmd:
       - rm -rf tmp/devnet
-      - mkdir -p tmp/devnet/nakamoto-neon/burnchain
-      - touch tmp/devnet/nakamoto-neon/burnchain/burnchain.sqlite
+      # - mkdir -p tmp/devnet/nakamoto-neon/burnchain
+      # - touch tmp/devnet/nakamoto-neon/burnchain/burnchain.sqlite
       # - ~/stacker/stacks-core/target/debug/stacks-node start --config=./Stacks.toml
       - RUST_LOG=debug stacks-node start --config=./Stacks-neon.toml
+
+  signer:
+    cmd:
+      # - RUST_LOG=debug stacks-signer run --config ./signer.toml
+      - stacks-signer run --config ./signer.toml
+
+  signer-docker:
+    cmd:
+      - docker run -it -p 30000:30000 -v $(pwd)/signer.toml:/signer.toml blockstack/stacks-core:pr-4268 stacks-signer run --config /signer.toml
   
   # testargs:
   #   cmd:
