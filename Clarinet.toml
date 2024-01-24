@@ -5,6 +5,16 @@ authors = []
 telemetry = false
 cache_dir = './.cache'
 requirements = []
+[contracts.delegate-sig]
+path = 'contracts/delegate-sig.clar'
+clarity_version = 2
+epoch = 2.4
+
+[contracts.pox-4]
+path = 'contracts/pox-4.clar'
+clarity_version = 2
+epoch = 2.4
+
 [contracts.signers-stackerdb]
 path = 'contracts/signers-stackerdb.clar'
 clarity_version = 2

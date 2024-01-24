@@ -6,11 +6,11 @@ settings:
 
 dependencies:
   '@clarigen/core':
-    specifier: 1.0.15
-    version: 1.0.15
+    specifier: 1.0.16-alpha.5
+    version: 1.0.16-alpha.5
   '@clarigen/test':
-    specifier: 1.0.16-alpha.0
-    version: 1.0.16-alpha.0(@types/node@20.11.5)
+    specifier: 1.0.16-alpha.5
+    version: 1.0.16-alpha.5(@types/node@20.11.5)
   '@hirosystems/clarinet-sdk':
     specifier: ^1.0.0
     version: 1.2.0(@types/node@20.11.5)
@@ -114,8 +114,8 @@ packages:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
     dev: true
 
-  /@clarigen/core@1.0.15:
-    resolution: {integrity: sha512-PMzAnppfmkpybkkOFdNZo4iLpm1UxTOgzNqwkAmdKTrFbNHgQbBwKvNP6kqkI4MJoQo2gOvJfFDA8utBUyhFRg==}
+  /@clarigen/core@1.0.16-alpha.5:
+    resolution: {integrity: sha512-DzbB4LFs+9ALo2Rudd/uNxA8JR88bZglay9+oNvREMW6gPDM5A4esO1ZZcWyso494Llf5UB8gBPGSwVbPA2UJw==}
     engines: {node: '>=10'}
     dependencies:
       micro-stacks: 1.2.1
@@ -124,21 +124,11 @@ packages:
       - '@scure/bip39'
     dev: false
 
-  /@clarigen/core@1.0.16-alpha.0:
-    resolution: {integrity: sha512-Nw8EBMPwthFR7tVKpV5BUgtG1I/dK28MhUPaO5kjkG5Fky4GRvAyhofJkWTHg9I9/YY5MSW/UE08ypKqV3m70Q==}
+  /@clarigen/test@1.0.16-alpha.5(@types/node@20.11.5):
+    resolution: {integrity: sha512-lXupJCQcoETrc+KmH1fp7g3aJ3Ara6igkESghWpfLRYpRavY+aUGKmmT6jmUgnYx3HrjE9iMwfzjCYmQmaqqkQ==}
     engines: {node: '>=10'}
     dependencies:
-      micro-stacks: 1.2.1
-    transitivePeerDependencies:
-      - '@scure/bip32'
-      - '@scure/bip39'
-    dev: false
-
-  /@clarigen/test@1.0.16-alpha.0(@types/node@20.11.5):
-    resolution: {integrity: sha512-K6hT872ElaX1baqO4KhT6uEIx4oaP9PhH4wkh5q0p4yBEu06bbAPuUIqZbfftMo6xogQToF1dZM8JWXF8T3Rwg==}
-    engines: {node: '>=10'}
-    dependencies:
-      '@clarigen/core': 1.0.16-alpha.0
+      '@clarigen/core': 1.0.16-alpha.5
       '@hirosystems/clarinet-sdk': 1.2.0(@types/node@20.11.5)
       '@hirosystems/clarinet-sdk-wasm': 1.2.0
       '@stacks/transactions': 6.10.0

@@ -13,8 +13,8 @@
   "license": "ISC",
   "prettier": "@stacks/prettier-config",
   "dependencies": {
-    "@clarigen/core": "1.0.15",
-    "@clarigen/test": "1.0.16-alpha.0",
+    "@clarigen/core": "1.0.16-alpha.5",
+    "@clarigen/test": "1.0.16-alpha.5",
     "@hirosystems/clarinet-sdk": "^1.0.0",
     "@scure/base": "^1.1.5",
     "@stacks/transactions": "^6.9.0",

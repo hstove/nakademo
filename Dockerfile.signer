@@ -1,0 +1,7 @@
+FROM blockstack/stacks-core
+
+RUN mkdir -p /config
+
+COPY signer.toml /config/signer.toml
+
+CMD ["stacks-signer", "run", "--config", "/config/signer.toml"]
