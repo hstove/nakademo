@@ -62,8 +62,13 @@ export function signStructuredData(
   // return Buffer.from(data.slice(2) + data.slice(0, 2), 'hex');
 }
 
-export function sign(hash: string, privateKey: string | Uint8Array) {
+export function vrsToRsv(sig: string) {
+  return hex.decode(sig.slice(2) + sig.slice(0, 2));
+}
+
+export function sign(_hash: string | Uint8Array, privateKey: string | Uint8Array) {
+  const hash = typeof _hash === 'string' ? _hash : hex.encode(_hash);
   const key = createStacksPrivateKey(privateKey);
   const data = signWithKey(key, hash).data;
-  return hex.decode(data.slice(2) + data.slice(0, 2));
+  return vrsToRsv(data);
 }

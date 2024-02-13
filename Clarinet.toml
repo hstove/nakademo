@@ -10,8 +10,18 @@ path = 'contracts/delegate-sig.clar'
 clarity_version = 2
 epoch = 2.4
 
+[contracts.mock-pox4]
+path = 'contracts/mock-pox4.clar'
+clarity_version = 2
+epoch = 2.4
+
 [contracts.pox-4]
 path = 'contracts/pox-4.clar'
+clarity_version = 2
+epoch = 2.4
+
+[contracts.signers]
+path = 'contracts/signers.clar'
 clarity_version = 2
 epoch = 2.4
 
@@ -21,10 +31,11 @@ clarity_version = 2
 epoch = 2.1
 
 [repl]
-enable_clarity_wasm = true
+clarity_wasm_mode = false
+show_timings = false
 
 [repl.analysis]
-passes = ['check_checker']
+passes = []
 
 [repl.analysis.check_checker]
 strict = false

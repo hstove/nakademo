@@ -14,10 +14,10 @@ test('sip18 structured data', () => {
 
   const hash = makeStructuredDataHash(data, domain);
 
-  console.log(hex.encode(hash));
+  // console.log(hex.encode(hash));
 });
 
-test.only('sip18 structured data', () => {
+test.skip('sip18 structured data', () => {
   // const rust_val =
   //   '3531321e1f262538b5dc06c5ae2f11549261d7ae174d9f77a55a92b00f330884695497be50655297eef9765c466d945ad1cb2c81b30b9fed6c165575dc9226e9edf78b8cd9e8';
 

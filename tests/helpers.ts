@@ -1,9 +1,18 @@
 // Move this stuff into @clarigen/test
 // import { mapGet, rov, varGet } from '@clarigen/test';
 import { project, accounts as _accounts } from '../src/clarigen-types';
-import { projectFactory, rawClarityToValue } from '@clarigen/core';
+import {
+  bootContractIdentifier,
+  contractFactory,
+  projectFactory,
+  rawClarityToValue,
+} from '@clarigen/core';
 
 export const contracts = projectFactory(project, 'simnet');
+
+// export const pox = contractFactory(contracts.pox4, bootContractIdentifier('pox-4', false));
+export const pox = contracts.mockPox4;
+// export const pox = contractFactory(contracts.mockPox4, bootContractIdentifier('pox-4', false));
 
 // export const contract = contracts.fundraiser;
 

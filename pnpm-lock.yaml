@@ -14,9 +14,15 @@ dependencies:
   '@hirosystems/clarinet-sdk':
     specifier: ^1.0.0
     version: 1.2.0(@types/node@20.11.5)
+  '@noble/curves':
+    specifier: ^1.3.0
+    version: 1.3.0
   '@scure/base':
     specifier: ^1.1.5
     version: 1.1.5
+  '@scure/btc-signer':
+    specifier: ^1.2.1
+    version: 1.2.1
   '@stacks/transactions':
     specifier: ^6.9.0
     version: 6.11.2
@@ -465,12 +471,23 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
+  /@noble/curves@1.3.0:
+    resolution: {integrity: sha512-t01iSXPuN+Eqzb4eBX0S5oubSqXbK/xXa1Ne18Hj8f9pStxztHCE2gfboSp/dZRLSqfuLpRK2nDXDK+W9puocA==}
+    dependencies:
+      '@noble/hashes': 1.3.3
+    dev: false
+
   /@noble/hashes@1.1.2:
     resolution: {integrity: sha512-KYRCASVTv6aeUi1tsF8/vpyR7zpfs3FUzy2Jqm+MU+LmUKhQ0y2FpfwqkCcxSg2ua4GALJd8k2R76WxwZGbQpA==}
     dev: false
 
   /@noble/hashes@1.1.5:
     resolution: {integrity: sha512-LTMZiiLc+V4v1Yi16TD6aX2gmtKszNye0pQgbaLqkvhIqP7nVsSaJsWloGQjJfJ8offaoP5GtX3yY5swbcJxxQ==}
+    dev: false
+
+  /@noble/hashes@1.3.3:
+    resolution: {integrity: sha512-V7/fPHgl+jsVPXqqeOzT8egNj2iBIVt+ECeMMG8TdcnTikP3oaBtUVqpT/gYCR68aEBJSF+XbYUxStjbFMqIIA==}
+    engines: {node: '>= 16'}
     dev: false
 
   /@noble/secp256k1@1.6.3:
@@ -600,6 +617,15 @@ packages:
 
   /@scure/base@1.1.5:
     resolution: {integrity: sha512-Brj9FiG2W1MRQSTB212YVPRrcbjkv48FoZi/u4l/zds/ieRrqsh7aUf6CLwkAq61oKXr/ZlTzlY66gLIj3TFTQ==}
+    dev: false
+
+  /@scure/btc-signer@1.2.1:
+    resolution: {integrity: sha512-/Zle18/aWhYDBuBeXGDGJTdo0/LKpQhU8ETBJeWABCQkbk0QHCFCinidTiz9hdQFfh0HtasPGq5p6EodVCfEew==}
+    dependencies:
+      '@noble/curves': 1.3.0
+      '@noble/hashes': 1.3.3
+      '@scure/base': 1.1.5
+      micro-packed: 0.5.1
     dev: false
 
   /@sinclair/typebox@0.27.8:
@@ -2305,6 +2331,12 @@ packages:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
     engines: {node: '>= 8'}
     dev: true
+
+  /micro-packed@0.5.1:
+    resolution: {integrity: sha512-VjBHcsMAVfivjCZPnqAEEkcihPBbNd39KLEMH76ksL3ORKSZE04gkrtsAmXtaTor67PmTO5h0Rq9+j3PA4zNrw==}
+    dependencies:
+      '@scure/base': 1.1.5
+    dev: false
 
   /micro-stacks@1.2.1:
     resolution: {integrity: sha512-CmFAH34GfgW9vMwnINflxH1COUWUg2kSYnPVfToZXPEJwHMGo8b3syte7s5zJ2rR/RSjpquQduiDNRAgF2Hh0w==}
