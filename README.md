@@ -2,6 +2,8 @@
 
 This project uses [Velociraptor](https://velociraptor.run) as a script runner (similar to a Makefile). You need it installed for the `vr` command to work.
 
+You also need to build `stacks-core` locally on the `feat/signers-cast-dkg-vote` branch. Run `cargo build`, and then add `./stacks-core/target/debug` to your $PATH.
+
 Start bitcoind:
 
 ```
