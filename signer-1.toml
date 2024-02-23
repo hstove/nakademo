@@ -1,0 +1,5 @@
+# wallet_2 in devnet.toml
+stacks_private_key = "530d9f61984c888536871c6573073bdfc0058896dc1adfe9a6a10dfacadc209101"
+node_host = "127.0.0.1:20443"
+endpoint = "127.0.0.1:30001"
+network = "testnet"

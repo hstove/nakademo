@@ -37,12 +37,15 @@ scripts:
       # - mkdir -p tmp/devnet/nakamoto-neon/burnchain
       # - touch tmp/devnet/nakamoto-neon/burnchain/burnchain.sqlite
       # - ~/stacker/stacks-core/target/debug/stacks-node start --config=./Stacks.toml
-      - RUST_LOG=debug stacks-node start --config=./Stacks-neon.toml
+      - RUST_LOG=debug stacks-node start --config ./Stacks-neon.toml
 
   signer:
-    cmd:
-      # - RUST_LOG=debug stacks-signer run --config ./signer.toml
-      - stacks-signer run --config ./signer.toml
+    pll:
+      - stacks-signer run --config ./signer-0.toml --reward-cycle 21
+      - stacks-signer run --config ./signer-1.toml --reward-cycle 21
+    # cmd:
+    #   # - RUST_LOG=debug stacks-signer run --config ./signer.toml
+    #   - stacks-signer run --config ./signer.toml
 
   signer-docker:
     cmd:

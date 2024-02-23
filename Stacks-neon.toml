@@ -5,7 +5,7 @@ rpc_bind = "0.0.0.0:20443"
 p2p_bind = "0.0.0.0:20444"
 data_url = "http://127.0.0.1:20443"
 p2p_address = "127.0.0.1:20443"
-miner = false
+miner = true
 mock_mining = false
 # mockmine = true
 seed = "3b68e410cc7f9b8bae76f2f2991b69ecd0627c95da22a904065dfb2a73d0585f01"
@@ -23,13 +23,14 @@ microblock_frequency = 1000
 disable_block_download = true
 disable_inbound_handshakes = true
 disable_inbound_walks = true
-public_ip_address = "1.1.1.1:1234"
+# public_ip_address = "1.1.1.1:1234"
 
 [miner]
-min_tx_fee = 1
+min_tx_fee = 10
+# first_attempt_time_ms = 500
 first_attempt_time_ms = 500
-second_attempt_time_ms = 1000
-block_reward_recipient = "ST3Q96TFVE6E0Q91XVX6S8RWAJW5R8XTZ8YEBM8RQ"
+second_attempt_time_ms = 360_000
+# block_reward_recipient = "ST3Q96TFVE6E0Q91XVX6S8RWAJW5R8XTZ8YEBM8RQ"
 wait_for_block_download = false
 microblock_attempt_time_ms = 10
 self_signing_seed = 1
@@ -76,12 +77,21 @@ amount = 100000000000000
 address = "ST3NBRSFKX28FQ2ZJ1MAKX58HKHSDGNV5N7R21XCP"
 amount = 100000000000000
 
-# Add orchestrator (docker-host) as an event observer
-# [[events_observer]]
-# endpoint = "host.docker.internal:20445"
-# retry_count = 255
-# include_data_events = true
-# events_keys = ["*"]
+## signers as event observers
+
+# signer 1
+[[events_observer]]
+endpoint = "localhost:30000"
+retry_count = 255
+include_data_events = true
+events_keys = ["*"]
+
+# signer 2
+[[events_observer]]
+endpoint = "localhost:30001"
+retry_count = 255
+include_data_events = true
+events_keys = ["*"]
 
 [burnchain]
 chain = "bitcoin"
@@ -109,27 +119,27 @@ start_height = 0
 
 [[burnchain.epochs]]
 epoch_name = "2.0"
-start_height = 0
+start_height = 110
 
 [[burnchain.epochs]]
 epoch_name = "2.05"
-start_height = 1
+start_height = 115
 
 [[burnchain.epochs]]
 epoch_name = "2.1"
-start_height = 2
+start_height = 116
 
 [[burnchain.epochs]]
 epoch_name = "2.2"
-start_height = 3
+start_height = 117
 
 [[burnchain.epochs]]
 epoch_name = "2.3"
-start_height = 4
+start_height = 118
 
 [[burnchain.epochs]]
 epoch_name = "2.4"
-start_height = 5
+start_height = 119
 
 [[burnchain.epochs]]
 epoch_name = "2.5"

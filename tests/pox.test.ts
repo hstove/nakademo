@@ -23,15 +23,29 @@ import {
   pubKeyfromPrivKey,
   publicKeyToString,
   randomBytes,
+  createStacksPrivateKey,
+  hash160,
+  addressFromPublicKeys,
+  AddressVersion,
+  AddressHashMode,
+  publicKeyFromBytes,
+  addressToString,
 } from '@stacks/transactions';
 import { hex } from '@scure/base';
 import { sign } from '../src/structured-data';
 import { secp256k1 } from '@noble/curves/secp256k1';
 import { Address, NETWORK } from '@scure/btc-signer';
+import { c32encode } from 'c32check';
 
 const utils = secp256k1.utils;
 const { randomPrivateKey } = secp256k1.utils;
 const aliceKey = randomPrivateKey();
+const bobPrivateKey = createStacksPrivateKey(
+  '530d9f61984c888536871c6573073bdfc0058896dc1adfe9a6a10dfacadc209101'
+);
+const bobPublic = pubKeyfromPrivKey(
+  '530d9f61984c888536871c6573073bdfc0058896dc1adfe9a6a10dfacadc209101'
+).data;
 
 export type PoxAddress = {
   version: Uint8Array;
@@ -239,6 +253,71 @@ describe('pox delegation', () => {
           amountUstx: 1n,
           // signerKey: alicePublic,
           // signerSig,
+        }),
+        alice
+      );
+    });
+
+    it('allowances work', () => {
+      const poxAddr = makePoxAddr();
+      txOk(
+        pox.setSignerKeyAllowance({
+          rewardCycle: 1,
+          poxAddr,
+          signerKey: bobPublic,
+          period: 1,
+          topic: 'stack-stx',
+          allowed: true,
+        }),
+        bob
+      );
+
+      const isValid = rovOk(
+        pox.verifySignerKeySig({
+          signerKey: bobPublic,
+          poxAddr,
+          rewardCycle: 1,
+          period: 1,
+          topic: 'stack-stx',
+          signerSigOpt: null,
+        })
+      );
+
+      expect(isValid).toBeTruthy();
+
+      txOk(
+        pox.setSignerKeyAllowance({
+          rewardCycle: 1,
+          poxAddr,
+          signerKey: bobPublic,
+          period: 1,
+          topic: 'stack-stx',
+          allowed: false,
+        }),
+        bob
+      );
+
+      expect(
+        rovErr(
+          pox.verifySignerKeySig({
+            signerKey: bobPublic,
+            poxAddr,
+            rewardCycle: 1,
+            period: 1,
+            topic: 'stack-stx',
+            signerSigOpt: null,
+          })
+        )
+      ).toEqual(19n);
+
+      txErr(
+        pox.setSignerKeyAllowance({
+          rewardCycle: 1,
+          poxAddr,
+          signerKey: bobPublic,
+          period: 1,
+          topic: 'stack-stx',
+          allowed: false,
         }),
         alice
       );

@@ -6,7 +6,7 @@ p2p_bind = "0.0.0.0:20444"
 data_url = "http://127.0.0.1:20443"
 p2p_address = "127.0.0.1:20443"
 miner = true
-mock_mining = true
+mock_mining = false
 seed = "3b68e410cc7f9b8bae76f2f2991b69ecd0627c95da22a904065dfb2a73d0585f01"
 local_peer_seed = "3b68e410cc7f9b8bae76f2f2991b69ecd0627c95da22a904065dfb2a73d0585f01"
 pox_sync_sample_secs = 0
@@ -84,12 +84,12 @@ amount = 100000000000000
 
 [burnchain]
 chain = "bitcoin"
-# mode = "nakamoto-neon"
-mode = "neon"
+mode = "nakamoto-neon"
+# mode = "neon"
 # mode = "mocknet"
 # mode = "mockamoto"
 magic_bytes = "T3"
-pox_prepare_length = 4
+pox_prepare_length = 5
 pox_reward_length = 10
 burn_fee_cap = 20_000
 poll_time_secs = 1
@@ -109,32 +109,32 @@ start_height = 0
 
 [[burnchain.epochs]]
 epoch_name = "2.0"
-start_height = 100
+start_height = 0
 
 [[burnchain.epochs]]
 epoch_name = "2.05"
-start_height = 100
+start_height = 1
 
 [[burnchain.epochs]]
 epoch_name = "2.1"
-start_height = 101
+start_height = 2
 
 [[burnchain.epochs]]
 epoch_name = "2.2"
-start_height = 102
+start_height = 3
 
 [[burnchain.epochs]]
 epoch_name = "2.3"
-start_height = 103
+start_height = 4
 
 [[burnchain.epochs]]
 epoch_name = "2.4"
-start_height = 104
+start_height = 5
 
 [[burnchain.epochs]]
 epoch_name = "2.5"
-start_height = 105
+start_height = 101
 
 [[burnchain.epochs]]
 epoch_name = "3.0"
-start_height = 121
+start_height = 131
