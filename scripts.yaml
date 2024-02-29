@@ -15,6 +15,11 @@ scripts:
     desc: "Mine a specified number of blocks blocks"
     cmd:
       - run() { vr bitcoin generatetoaddress $1 n3GRiDLKWuKLCw1DZmV75W1mE35qmW2tQm; }; run
+  
+  m:
+    desc: "Mine a specified number of blocks blocks"
+    cmd:
+      - run() { vr bitcoin generatetoaddress $1 n3GRiDLKWuKLCw1DZmV75W1mE35qmW2tQm; }; run
 
   bitcoin:
     desc: "Helper for bitcoin-cli"

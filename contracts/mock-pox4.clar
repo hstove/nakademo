@@ -229,6 +229,19 @@
     bool
 )
 
+(define-map used-signer-key-authorizations
+    {
+        signer-key: (buff 33),
+        reward-cycle: uint,
+        period: uint,
+        topic: (string-ascii 12),
+        pox-addr: { version: (buff 1), hashbytes: (buff 32) },
+        auth-id: uint,
+        max-amount: uint,
+    }
+    bool
+)
+
 ;; What's the reward cycle number of the burnchain block height?
 ;; Will runtime-abort if height is less than the first burnchain block (this is intentional)
 (define-read-only (burn-height-to-reward-cycle (height uint))
@@ -595,7 +608,9 @@
                           (start-burn-ht uint)
                           (lock-period uint)
                           (signer-sig (optional (buff 65)))
-                          (signer-key (buff 33)))
+                          (signer-key (buff 33))
+                          (max-amount uint)
+                          (auth-id uint))
     ;; this stacker's first reward cycle is the _next_ reward cycle
     (let ((first-reward-cycle (+ u1 (current-pox-reward-cycle)))
           (specified-reward-cycle (+ u1 (burn-height-to-reward-cycle start-burn-ht))))
@@ -621,7 +636,7 @@
         (err ERR_STACKING_INSUFFICIENT_FUNDS))
 
       ;; Validate ownership of the given signer key
-      (try! (verify-signer-key-sig pox-addr (- first-reward-cycle u1) "stack-stx" lock-period signer-sig signer-key))
+      (try! (verify-signer-key-sig pox-addr (- first-reward-cycle u1) "stack-stx" lock-period signer-sig signer-key max-amount auth-id))
 
       ;; ensure that stacking can be performed
       (try! (can-stack-stx pox-addr amount-ustx first-reward-cycle lock-period))
@@ -733,7 +748,9 @@
                                          (topic (string-ascii 12))
                                          (period uint)
                                          (signer-sig-opt (optional (buff 65)))
-                                         (signer-key (buff 33)))
+                                         (signer-key (buff 33))
+                                         (max-amount uint)
+                                         (auth-id uint))
   (match signer-sig-opt
     ;; `signer-sig` is present, verify the signature
     signer-sig (ok (asserts! 
@@ -764,7 +781,9 @@
 (define-private (inner-stack-aggregation-commit (pox-addr { version: (buff 1), hashbytes: (buff 32) })
                                                 (reward-cycle uint)
                                                 (signer-sig (optional (buff 65)))
-                                                (signer-key (buff 33)))
+                                                (signer-key (buff 33))
+                                                (max-amount uint)
+                                                (auth-id uint))
   (let ((partial-stacked
          ;; fetch the partial commitments
          (unwrap! (map-get? partial-stacked-by-cycle { pox-addr: pox-addr, sender: tx-sender, reward-cycle: reward-cycle })
@@ -772,7 +791,7 @@
     ;; must be called directly by the tx-sender or by an allowed contract-caller
     (asserts! (check-caller-allowed)
               (err ERR_STACKING_PERMISSION_DENIED))
-    (try! (verify-signer-key-sig pox-addr reward-cycle "agg-commit" u1 signer-sig signer-key))
+    (try! (verify-signer-key-sig pox-addr reward-cycle "agg-commit" u1 signer-sig signer-key max-amount auth-id))
     (let ((amount-ustx (get stacked-amount partial-stacked)))
       (try! (can-stack-stx pox-addr amount-ustx reward-cycle u1))
       ;; Add the pox addr to the reward cycle, and extract the index of the PoX address
@@ -807,8 +826,10 @@
 (define-public (stack-aggregation-commit (pox-addr { version: (buff 1), hashbytes: (buff 32) })
                                          (reward-cycle uint)
                                          (signer-sig (optional (buff 65)))
-                                         (signer-key (buff 33)))
-    (match (inner-stack-aggregation-commit pox-addr reward-cycle signer-sig signer-key)
+                                         (signer-key (buff 33))
+                                         (max-amount uint)
+                                         (auth-id uint))
+    (match (inner-stack-aggregation-commit pox-addr reward-cycle signer-sig signer-key max-amount auth-id)
         pox-addr-index (ok true)
         commit-err (err commit-err)))
 
@@ -817,8 +838,10 @@
 (define-public (stack-aggregation-commit-indexed (pox-addr { version: (buff 1), hashbytes: (buff 32) })
                                                  (reward-cycle uint)
                                                  (signer-sig (optional (buff 65)))
-                                                 (signer-key (buff 33)))
-    (inner-stack-aggregation-commit pox-addr reward-cycle signer-sig signer-key))
+                                                 (signer-key (buff 33))
+                                                 (max-amount uint)
+                                                 (auth-id uint))
+    (inner-stack-aggregation-commit pox-addr reward-cycle signer-sig signer-key max-amount auth-id))
 
 ;; Commit partially stacked STX to a PoX address which has already received some STX (more than the Stacking min).
 ;; This allows a delegator to lock up marginally more STX from new delegates, even if they collectively do not
@@ -1066,7 +1089,9 @@
 (define-public (stack-extend (extend-count uint)
                              (pox-addr { version: (buff 1), hashbytes: (buff 32) })
                              (signer-sig (optional (buff 65)))
-                             (signer-key (buff 33)))
+                             (signer-key (buff 33))
+                             (max-amount uint)
+                             (auth-id uint))
    (let ((stacker-info (stx-account tx-sender))
          ;; to extend, there must already be an etry in the stacking-state
          (stacker-state (unwrap! (get-stacker-info tx-sender) (err ERR_STACK_EXTEND_NOT_LOCKED)))
@@ -1092,7 +1117,7 @@
               (err ERR_STACKING_IS_DELEGATED))
 
     ;; Verify signature from delegate that allows this sender for this cycle
-    (try! (verify-signer-key-sig pox-addr cur-cycle "stack-extend" extend-count signer-sig signer-key))
+    (try! (verify-signer-key-sig pox-addr cur-cycle "stack-extend" extend-count signer-sig signer-key max-amount auth-id))
 
     ;; TODO: add more assertions to sanity check the `stacker-info` values with
     ;;       the `stacker-state` values

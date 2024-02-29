@@ -1,8 +1,8 @@
 # How to run the devnet
 
-This project uses [Velociraptor](https://velociraptor.run) as a script runner (similar to a Makefile). You need it installed for the `vr` command to work.
+This project uses [Velociraptor](https://velociraptor.run) as a script runner (similar to a Makefile). You need it installed for the `vr` command to work. You can see what's happening in the `scripts.yaml` file.
 
-You also need to build `stacks-core` locally on the `feat/signers-cast-dkg-vote` branch. Run `cargo build`, and then add `./stacks-core/target/debug` to your $PATH.
+You also need to build `stacks-core` locally on the `next` branch. Run `cargo build`, and then add `./stacks-core/target/debug` to your $PATH.
 
 Start bitcoind:
 
@@ -13,7 +13,7 @@ vr btc
 Mine 195 bitcoin blocks:
 
 ```
-vr mineblocks 195
+vr m 195
 ```
 
 Start the signers. This will spin up 2 signers:
@@ -35,9 +35,9 @@ NB: once you start mining blocks, the logs go crazy and never stop. I think it m
 Mine 7 blocks with ~10 seconds in between so that the Stacks miner can make Stacks blocks:
 
 ```
-vr mineblocks 1
+vr m 1
 # wait 10 seconds
-vr mineblocks 1
+vr m 1
 # ...
 ```
 
@@ -45,18 +45,18 @@ Check [http://localhost:20443/v2/pox](http://localhost:20443/v2/pox) to see the 
 
 Once activated, make Stacking transactions:
 
-```
+```bash
 pnpm tsx scripts/stack-stx.ts
 ```
 
-Mine 1 block (`vr mineblocks 1`) and refresh `/v2/pox`. You should see `stacked_ustx` in the next cycle be non-zero.
+Mine 1 block (`vr m 1`) and refresh `/v2/pox`. You should see `stacked_ustx` in the next cycle be non-zero.
 
 Mine until 206, wait 10 seconds, then mine 1 more:
 
-```
-vr mineblocks 5
+```bash
+vr m 5
 # wait
-vr mineblocks 1
+vr m 1
 ```
 
 Now the reward set should be calculated: [http://localhost:20443/v2/stacker_set/21](http://localhost:20443/v2/stacker_set/21)
@@ -67,7 +67,7 @@ DKG never finishes with a single Stacks node, because a Stacks node doesn't send
 
 You can check to see if an aggregate key was voted on with:
 
-```tsx
+```bash
 pnpm tsx scripts/get-aggregate-key.ts 21 # <- replace with any reward cycle
 ```
 
